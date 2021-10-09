@@ -1,0 +1,23 @@
+/// This file has messages for describing droplez-uploader service
+syntax = "proto3";
+package droplez_uploader;
+option go_package = "github.com/droplez/droplez-go-proto/pkg/uploader";
+
+service Uploader {
+  rpc Upload(stream Chunk) returns (UploadedFileData);
+}
+
+message Chunk {
+  bytes Content = 1;
+  FileMetadata metadata = 2;
+}
+
+message FileMetadata {
+  string Author = 1;
+  string Name = 2;
+  string Description = 3;
+}
+
+message UploadedFileData {
+  string UUID = 1;
+}
